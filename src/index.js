@@ -42,7 +42,8 @@ class UserList extends React.Component {
             <div className="row text-center">
               <ul className="list-group custom-list">
                 {listHTML}
-                {/* <li className="list-group custom-list"> <Water /> </li> */}
+                <li className="list-group-item"> <NameForm /> </li>
+                <li className="list-group-item"> <Water /> </li>
                 <li className="list-group custom-list"> <Clock /> </li>
               </ul>
             </div>
@@ -55,11 +56,35 @@ class UserList extends React.Component {
 
 // Water Component
 class Water extends React.Component {
-  getInitialState() {
-    return {
-      currntTemp: 10
-    };
+
+  constructor(props) {
+    super(props);
+    this.state = { currntTemp: 10 };
+    this.setTemprature = this.setTemprature.bind(this);
+    this.changeAreaValue = this.changeAreaValue.bind(this);
+    this.submitHandler = this.submitHandler.bind(this);
+    this.changeColor = this.changeColor.bind(this);
   }
+
+  setTemprature(event) {
+    this.setState({
+      currntTemp: event.target.value
+    })
+  }
+
+  changeAreaValue(event) {
+    this.setState({ textareaValue: event.target.value })
+  }
+
+  submitHandler(event) {
+    event.preventDefault();
+    console.log(">>>> Form Submit >>>>>");
+  }
+
+  changeColor(event) {
+    this.setState({ color: event.target.value })
+  }
+
   render() {
     var stateOfWater;
     if (this.state.currntTemp <= 32) {
@@ -70,12 +95,29 @@ class Water extends React.Component {
       stateOfWater = 'Liquid';
     }
     return (
-      <div>
-        <p>{this.state.currntTemp}F, water is considered to be a {stateOfWater} state of matter </p>
-      </div>
+      <form onSubmit={this.submitHandler}>
+        <div className="d-inline">
+          <input type="text" onChange={this.setTemprature} value={this.state.currntTemp} />
+          <p>{this.state.currntTemp}F, water is considered to be a {stateOfWater} state of matter </p>
+          <textarea value={this.state.textareaValue} onChange={this.changeAreaValue} /><br/>
+          <label>
+            Select yout color
+            <select value={this.state.color} onChange={this.changeColor}>
+              <option value="red">Red</option>
+              <option value="blue">Blue</option>
+              <option value="green">Green</option>
+              <option value="pink">pPink</option>
+            </select>
+
+          </label>
+          <div> <input type="submit" value="Submit" /> </div>
+        </div>
+        <p>Selected color: {this.state.color} </p>
+      </form>
     );
   }
 }
+
 
 // Clock
 class Clock extends React.Component {
@@ -116,5 +158,40 @@ class Clock extends React.Component {
 function createDom() {
   ReactDOM.render(<UserList />, document.getElementById('root'))
 }
+
+// Form example
+class NameForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { value: '' };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({ value: event.target.value.toUpperCase() });
+  }
+
+  handleSubmit(event) {
+    alert('A name was submitted: ' + this.state.value);
+    event.preventDefault();
+  }
+
+  render() {
+    return (
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <label>
+            Name:
+          <input type="text" value={this.state.value} onChange={this.handleChange} />
+          </label>
+          <input type="submit" value="Submit" />
+        </form>
+        value : {this.state.value}
+      </div>
+    );
+  }
+}
+
 
 setInterval(createDom, 1000)
