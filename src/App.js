@@ -42,6 +42,7 @@ class App extends Component {
           {/* <Suspense fallback={<div>Loading....</div>}> */}
 
           {/* Lazy loading component */}
+          <Route exact path="/" component={asyncHello} />
           <Route path="/hello" component={asyncHello} />
           <Route exact path="/list" component={asyncUserList} />
           <Route exact path='/list/form-demo' component={asyncForms} />
