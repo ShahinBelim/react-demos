@@ -22,13 +22,18 @@ import Loadable from 'react-loadable';
 
 // Lazy loading component using Loadable
 
-const MyLoadingComponent = ({ isLoading, error }) => {
+const MyLoadingComponent = (props) => {
+  console.log("props : ", props)
   // Handle the loading state
-  if (isLoading) {
+  if (props.pastDelay) {
+    // return true when component load time exceed 0.3 second
     return <div> Loading....... </div>;
   }
+  else if (props.timedOut) {
+    return <div>Taking a long time... <button onClick={props.retry}>Retry</button></div>;
+  }
   // Handle error state
-  if (error) {
+  if (props.error) {
     return <div> Sorry, there was a problem loading page. </div>;
   }
   else {
@@ -39,19 +44,27 @@ const MyLoadingComponent = ({ isLoading, error }) => {
 
 const asyncHello = Loadable({
   loader: () => import("./routes/Hello"),
-  loading: MyLoadingComponent
+  loading: MyLoadingComponent,
+  pastDelay: 300, // 0.3 seconds -  Avoid loading screen only quickly flashes on the screen.
+  timedOut: 10000 // 10 seconds
 })
 const asyncUserList = Loadable({
   loader: () => import("./routes/Userlist"),
-  loading: MyLoadingComponent
+  loading: MyLoadingComponent,
+  pastDelay: 300, // 0.3 seconds
+  timedOut: 10000 // 10 seconds
 })
 const asyncForms = Loadable({
   loader: () => import('./routes/Forms'),
-  loading: MyLoadingComponent
+  loading: MyLoadingComponent,
+  pastDelay: 300, // 0.3 seconds
+  timedOut: 10000 // 10 seconds
 });
 const asyncNotFound = Loadable({
   loader: () => import('./routes/NotFound'),
-  loading: MyLoadingComponent
+  loading: MyLoadingComponent,
+  pastDelay: 300, // 0.3 seconds
+  timedOut: 10000 // 10 seconds
 })
 class App extends Component {
   constructor(props) {
