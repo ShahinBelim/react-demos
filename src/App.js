@@ -3,8 +3,8 @@ import {
   Route,
   Switch,
   Link
-} from 'react-router-dom'
-
+} from 'react-router-dom';
+import Loadable from 'react-loadable';
 //const Hello = lazy(() => import('./routes/Hello'));
 
 // Static loading component
@@ -13,13 +13,46 @@ import {
 // import Forms from './routes/Forms';
 // import NotFound from './routes/NotFound';
 
-// Lazy loading component
-import asyncComponent from './components/AsyncComponent';
-const asyncHello = asyncComponent(() => import("./routes/Hello"));
-const asyncUserList = asyncComponent(() => import('./routes/Userlist'));
-const asyncForms = asyncComponent(() => import('./routes/Forms'));
-const asyncNotFound = asyncComponent(() => import('./routes/NotFound'));
+// Lazy loading component using asyncComponent
+// import asyncComponent from './components/AsyncComponent';
+// const asyncHello = asyncComponent(() => import("./routes/Hello"));
+// const asyncUserList = asyncComponent(() => import('./routes/Userlist'));
+// const asyncForms = asyncComponent(() => import('./routes/Forms'));
+// const asyncNotFound = asyncComponent(() => import('./routes/NotFound'));
 
+// Lazy loading component using Loadable
+
+const MyLoadingComponent = ({ isLoading, error }) => {
+  // Handle the loading state
+  if (isLoading) {
+    return <div> Loading....... </div>;
+  }
+  // Handle error state
+  if (error) {
+    return <div> Sorry, there was a problem loading page. </div>;
+  }
+  else {
+    return null;
+  }
+}
+
+
+const asyncHello = Loadable({
+  loader: () => import("./routes/Hello"),
+  loading: MyLoadingComponent
+})
+const asyncUserList = Loadable({
+  loader: () => import("./routes/Userlist"),
+  loading: MyLoadingComponent
+})
+const asyncForms = Loadable({
+  loader: () => import('./routes/Forms'),
+  loading: MyLoadingComponent
+});
+const asyncNotFound = Loadable({
+  loader: () => import('./routes/NotFound'),
+  loading: MyLoadingComponent
+})
 class App extends Component {
   constructor(props) {
     super(props);
