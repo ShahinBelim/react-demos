@@ -7,23 +7,22 @@ import {
 import Loadable from 'react-loadable';
 //const Hello = lazy(() => import('./routes/Hello'));
 
-// Static loading component
+/*** Static loading component ***/
 // import Hello from './routes/Hello';
 // import UserList from './routes/Userlist';
 // import Forms from './routes/Forms';
 // import NotFound from './routes/NotFound';
 
-// Lazy loading component using asyncComponent
+/*** Lazy loading component using asyncComponent ***/
 // import asyncComponent from './components/AsyncComponent';
 // const asyncHello = asyncComponent(() => import("./routes/Hello"));
 // const asyncUserList = asyncComponent(() => import('./routes/Userlist'));
 // const asyncForms = asyncComponent(() => import('./routes/Forms'));
 // const asyncNotFound = asyncComponent(() => import('./routes/NotFound'));
 
-// Lazy loading component using Loadable
-
+/*** Lazy loading component using Loadable ***/
 const MyLoadingComponent = (props) => {
-  console.log("props : ", props)
+  //console.log("props : ", props)
   // Handle the loading state
   if (props.pastDelay) {
     // return true when component load time exceed 0.3 second
@@ -69,9 +68,7 @@ const asyncNotFound = Loadable({
 class App extends Component {
   constructor(props) {
     super(props);
-    console.log("-App-");
   }
-
 
   render() {
     return (
