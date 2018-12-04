@@ -25,7 +25,7 @@ class Forms extends React.Component {
         <div className="jumbotron custom">
           <div className="container">
             <div className="row">
-              <form onSubmit={this.handleSubmit}>
+              <form onSubmit={this.handleSubmit} className="form-center">
                 <div className="form-group">
                   <label htmlFor="exampleInputEmail1">Email address</label>
                   <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" value={this.state.email} onChange={this.handleChange} />

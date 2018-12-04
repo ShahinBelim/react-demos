@@ -72,36 +72,40 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <h1>Home Page</h1>
-        <ul>
-          <li><Link to="/">Back To Home Page</Link></li>
-          <li><Link to="/hello">Hello</Link> </li>
-          <li><Link to="/list"> List page </Link> </li>
-          <li><Link to="/list/form-demo">Form demo page</Link></li>
-        </ul>
+      <main role="main">
+        <div className="jumbotron custom">
+          {/* {this.renderHello()} */}
+          <div className="container">
+            <h1 className='text-center'>Home Page</h1>
+            <ul className='menu-list text-center mb-4'>
+              <li><Link to="/">Back To Home Page</Link></li>
+              <li><Link to="/hello">Hello</Link> </li>
+              <li><Link to="/list"> List page </Link> </li>
+              <li><Link to="/list/form-demo">Form demo page</Link></li>
+            </ul>
+            <Switch>
+              {/* <Suspense fallback={<div>Loading....</div>}> */}
 
-        <Switch>
-          {/* <Suspense fallback={<div>Loading....</div>}> */}
+              {/* Lazy loading component */}
+              <Route exact path="/" component={asyncHello} />
+              <Route path="/hello" component={asyncHello} />
+              <Route exact path="/list" component={asyncUserList} />
+              <Route exact path='/list/form-demo' component={asyncForms} />
+              <Route component={asyncNotFound}></Route>
 
-          {/* Lazy loading component */}
-          <Route exact path="/" component={asyncHello} />
-          <Route path="/hello" component={asyncHello} />
-          <Route exact path="/list" component={asyncUserList} />
-          <Route exact path='/list/form-demo' component={asyncForms} />
-          <Route component={asyncNotFound}></Route>
-
-          {/* Static loading component */}
-          {/* <Route path="/hello" component={Hello} />
+              {/* Static loading component */}
+              {/* <Route path="/hello" component={Hello} />
           <Route exact path="/list" component={UserList} />
           <Route exact path='/list/form-demo' component={Forms} />
           <Route component={NotFound}></Route> */}
 
 
-          {/* The exact param disables the partial matching for a route and makes sure that it only returns the route if the path is an EXACT match to the current url. */}
-          {/* </Suspense> */}
-        </Switch>
-      </div>
+              {/* The exact param disables the partial matching for a route and makes sure that it only returns the route if the path is an EXACT match to the current url. */}
+              {/* </Suspense> */}
+            </Switch>
+          </div>
+        </div>
+      </main>
     )
   }
 }

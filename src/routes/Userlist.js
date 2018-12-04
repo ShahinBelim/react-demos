@@ -2,7 +2,7 @@ import React from 'react';
 import Hello from './Hello';
 import Liquid from './Liquid';
 import Clock from './Clock';
-
+import ToggleDiv from './ToggleDiv';
 // UserList Component
 class UserList extends React.Component {
   renderHello() {
@@ -34,22 +34,16 @@ class UserList extends React.Component {
     })
 
     return (
-      <main role="main">
-        <div className="jumbotron custom">
-          {/* {this.renderHello()} */}
-          <div className="container">
-            <div className="row text-center">
-              <ul className="list-group custom-list">
-                {listHTML}
-                <li className="list-group-item"> <Liquid /> </li>
-                <li className="list-group-item"> <strong className="text-success">Water: </strong> <Liquid config={water} /> </li>
-                <li className="list-group-item"> <strong className="text-danger">Ethanol: </strong> <Liquid config={ethanol} /> </li>
-                <li className="list-group custom-list"> <Clock /> </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </main>
+      <div className="row text-center">
+        <ul className="list-group custom-list">
+          {listHTML}
+          <li className="list-group-item"> <Liquid /> </li>
+          <li className="list-group-item"> <strong className="text-success">Water: </strong> <Liquid config={water} /> </li>
+          <li className="list-group-item"> <strong className="text-danger">Ethanol: </strong> <Liquid config={ethanol} /> </li>
+          <li className="list-group-item"> <Clock /> </li>
+          <li className="list-group-item"> <ToggleDiv /></li>
+        </ul>
+      </div>
     )
   }
 }

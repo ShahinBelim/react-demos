@@ -56,6 +56,9 @@ class Liquid extends React.Component {
           <input type="text" onChange={this.setTemprature} value={this.state.currntTemp} />
           <p>{this.state.currntTemp}F, {this.props.config ? this.props.config.name : 'Water'} is considered to be a {stateOfWater} state of matter </p>
           {formElements}
+
+          In Liquid component - color value after change from child component : {this.state.color}
+
         </div>
       </form>
     );
